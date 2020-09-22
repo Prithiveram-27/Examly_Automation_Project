@@ -1,0 +1,38 @@
+package newSelinium;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Examlyproject {
+
+	public static void main(String[] args) throws InterruptedException {
+		
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\hp\\Downloads\\chromedriver_win32\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		String baseURL="https://pscollege841.examly.net/login";
+		driver.get(baseURL);
+		WebElement Email = driver.findElement(By.xpath("//*[@id=\"email\"]"));
+		Email.sendKeys("studentpractice1@examly.in");
+		WebElement login = driver.findElement(By.xpath("//*[@id=\"lgnNext0\"]"));
+		login.click();
+		Thread.sleep(5000);
+		WebElement pass = driver.findElement(By.xpath("//*[@id=\"password\"]"));
+		pass.sendKeys("studentpractice1");
+		WebElement enter = driver.findElement(By.xpath("//*[@id=\"lgnLogin0\"]"));
+		enter.click();
+		String actual_error=driver.findElement(By.xpath("//*[@id=\"email\"]")).getText();
+		String expected_error="Enter valid email";
+		Assert.assertEquals(actual_error,expected_error);
+		Thread.sleep(5000);
+		
+		WebElement logout = driver.findElement(By.className("container ulogPad loglay"));
+		logout.click();
+		
+		System.out.println("SIGNED");
+		// driver.close();
+		
+	}
+
+}
